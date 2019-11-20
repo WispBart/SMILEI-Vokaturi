@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -44,7 +45,15 @@ public class TestVokaturi : MonoBehaviour
                 .Skip((int)(startOffsetSeconds * numSamples))
                 .ToArray();
 
-            if (samplesPart.Length > numSamples) samplesPart = samples.Take(numSamples).ToArray();
+            if (samplesPart.Length > numSamples) samplesPart = samplesPart.Take(numSamples).ToArray();
+
+            using (BinaryWriter writer = new BinaryWriter(File.Open($"float{i}.txt", FileMode.Create)))
+            {
+                foreach (float f in samplesPart)
+                {
+                    writer.Write(f);
+                }
+            }
 
             if (audioSource.clip.channels == 2)
             {
