@@ -47,13 +47,13 @@ public class TestVokaturi : MonoBehaviour
 
             if (samplesPart.Length > numSamples) samplesPart = samplesPart.Take(numSamples).ToArray();
 
-            using (BinaryWriter writer = new BinaryWriter(File.Open($"float{i}.txt", FileMode.Create)))
-            {
-                foreach (float f in samplesPart)
-                {
-                    writer.Write(f);
-                }
-            }
+            //using (BinaryWriter writer = new BinaryWriter(File.Open($"float{i}.txt", FileMode.Create)))
+            //{
+            //    foreach (float f in samplesPart)
+            //    {
+            //        writer.Write(f);
+            //    }
+            //}
 
             if (audioSource.clip.channels == 2)
             {
