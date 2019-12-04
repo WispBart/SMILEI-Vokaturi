@@ -13,7 +13,7 @@ public class VokaturiLib
     //Derived from VokaturiLib.h
     //VokaturiVoice => IntPtr
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern IntPtr VokaturiVoice_create(double sample_rate, int buffer_length);
 
     public struct VokaturiEmotionProbabilities
@@ -31,38 +31,38 @@ public class VokaturiLib
         }
     }
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_setRelativePriorProbabilities(IntPtr voice, VokaturiEmotionProbabilities priorEmotionProbabilities);
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill(IntPtr voice, int num_samples, double[] samples); // deprecated; identical to VokaturiVoice_fill_float64array
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill_float64array(IntPtr voice, int num_samples, double[] samples);
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill_float32array(IntPtr voice, int num_samples, float[] samples);
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill_int32array(IntPtr voice, int num_samples, int[] samples);
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill_int16array(IntPtr voice, int num_samples, short[] samples);
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill_float64value(IntPtr voice, double sample);
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill_float32value(IntPtr voice, float sample);
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill_int32value(IntPtr voice, int sample);
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fill_int16value(IntPtr voice, int sample);   // NOT short, because of C argument sizes
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fillInterlacedStereo_float64array(IntPtr left, IntPtr right, int num_samples_per_channel, double[] samples);
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fillInterlacedStereo_float32array(IntPtr left, IntPtr right, int num_samples_per_channel, float[] samples);
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fillInterlacedStereo_int32array(IntPtr left, IntPtr right, int num_samples_per_channel, int[] samples);
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_fillInterlacedStereo_int16array(IntPtr left, IntPtr right, int num_samples_per_channel, short[] samples);
 
     public struct VokaturiQuality
@@ -77,16 +77,16 @@ public class VokaturiLib
         }
     }
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_extract(IntPtr voice, ref VokaturiQuality quality, ref VokaturiEmotionProbabilities emotionProbabilities);
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_destroy(IntPtr voice);
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern void VokaturiVoice_reset(IntPtr voice);
 
-    [DllImport(@"Assets\Vokaturi\OpenVokaturi-3-3-win64.dll")]
+    [DllImport("OpenVokaturi-3-3")]
     public static extern IntPtr Vokaturi_versionAndLicense();
 
     #endregion
