@@ -6,13 +6,36 @@ using UnityEngine;
 public class RecordMicrophone : MonoBehaviour
 {
     public bool Record = false;
-    public bool WriteWav = false;
     public bool PlayWav = false;
 
-    public string DeviceName { get; set; }
-    public string[] AvailableDevices;
+    [Tooltip("RecordingBufferSize in seconds")]
+    public int RecordingBufferSize = 10;
+    public int RecordingDeviceIndex = 0;
+    public string DeviceName
+    {
+        get { return AvailableRecordingDevices[RecordingDeviceIndex]; }
+    }
+    public string[] AvailableRecordingDevices;
     public int Frequency = 44100;
-    public int SamplesRecorded = 0;
+
+    public int SamplesRecorded {
+        get
+        {
+            if (Microphone.IsRecording(DeviceName))
+            {
+                return Microphone.GetPosition(DeviceName);
+            }
+            else return 0;
+        }
+    }
+
+    public float TimeRecorded
+    {
+        get
+        {
+            return (float) SamplesRecorded / (float) Frequency;
+        }
+    }
 
     private AudioSource audioSource;
 
@@ -20,8 +43,15 @@ public class RecordMicrophone : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        AvailableDevices = Microphone.devices;
+        AvailableRecordingDevices = Microphone.devices;
     }
+
+    //public float[] GetSamples(float )
+    //{
+    //    float[] samples = new float[RecordingBufferSize * audioSource.clip.frequency * audioSource.clip.channels];
+    //    audioSource.clip.GetData(samples,)
+    //    return samples;
+    //}
 
     void Update()
     {
@@ -31,23 +61,8 @@ public class RecordMicrophone : MonoBehaviour
         }
         else if (Record && !Microphone.IsRecording(DeviceName))
         {
-            audioSource.clip = Microphone.Start(DeviceName, true, 10, Frequency);
+            audioSource.clip = Microphone.Start(DeviceName, true, RecordingBufferSize, Frequency);
             
-        }
-
-        if (WriteWav)
-        {
-            float[] samples = new float[audioSource.clip.samples * audioSource.clip.channels];
-            audioSource.clip.GetData(samples, 0);
-            using (BinaryWriter writer = new BinaryWriter(File.Open($"recorded-samples.txt", FileMode.Create)))
-            {
-                foreach (float f in samples)
-                {
-                    writer.Write(f);
-                }
-            }
-
-            WriteWav = false;
         }
 
         if (PlayWav && !audioSource.isPlaying)
@@ -59,9 +74,6 @@ public class RecordMicrophone : MonoBehaviour
             audioSource.Stop();
         }
 
-        if (Microphone.IsRecording(DeviceName))
-        {
-            SamplesRecorded = Microphone.GetPosition(DeviceName);
-        }
+        
     }
 }
