@@ -1,0 +1,9 @@
+{
+  "name": "nl.ixdfontysict.smilei.vocaturi",
+  "displayName": "SMILEI Vokaturi",
+  "version": "0.0.0",
+  "unity": "2018.3",
+  "description": "Uses the Vokaturi SDK to read emotion data from voice.",
+  "type": "sample",
+  "hideInEditor": false
+}
