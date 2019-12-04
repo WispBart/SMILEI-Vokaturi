@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using UnityEngine;
 
-public struct VokaturiAnalysis
+namespace SMILEI.Vokaturi
+{
+    public struct VokaturiAnalysis
 {
     public VokaturiLib.VokaturiQuality Quality;
     public VokaturiLib.VokaturiEmotionProbabilities EmotionProbabilities;
@@ -85,4 +84,50 @@ public static class Vokaturi
 
         return vokaturiAnalyses;
     }
+    
+        public static List<VokaturiAnalysis> CalculateEmotion(float[] samples, int frequency, int channels, float duration)
+    {
+        if (duration < 1) throw new ArgumentException("Audioclip requires minimum length of 1.0s!");
+
+        int numSamplesPerChannel = (int)(duration * frequency);
+        
+        //create voices for each channel
+        voices = new IntPtr[channels];
+        for (int i = 0; i < channels; i++)
+        {
+            voices[i] = VokaturiLib.VoiceCreate(frequency, numSamplesPerChannel);
+        }
+
+        if (channels == 2)
+        {
+            VokaturiLib.VoiceFillInterlacedStereoFloat32Array(voices[0], voices[1], samples.Length / 2, samples);
+        }
+        else
+            VokaturiLib.VoiceFillFloat32Array(voices[0], samples.Length, samples);
+
+        VokaturiLib.VokaturiQuality quality = new VokaturiLib.VokaturiQuality();
+        VokaturiLib.VokaturiEmotionProbabilities emotionProbabilities = new VokaturiLib.VokaturiEmotionProbabilities();
+
+        List<VokaturiAnalysis> vokaturiAnalyses = new List<VokaturiAnalysis>();
+
+        for (int i = 0; i < channels; i++)
+        {
+            VokaturiLib.VoiceExtract(voices[i], ref quality, ref emotionProbabilities);
+            vokaturiAnalyses.Add(new VokaturiAnalysis(quality,emotionProbabilities));
+
+            //Debug.Log($"Channel {i}: {quality}");
+            //Debug.Log($"Channel {i}: {emotionProbabilities}");
+        }
+
+        //destroy voices
+        for (int i = 0; i < channels; i++)
+        {
+            VokaturiLib.VoiceDestroy(voices[i]);
+        }
+
+        return vokaturiAnalyses;
+    }
+}
+
+
 }

@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SMILEI.Vokaturi;
 using UnityEngine;
 
 public struct AudioData

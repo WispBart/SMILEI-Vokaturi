@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using SMILEI.Vokaturi;
 using UnityEngine;
 
 public class VokaturiTest : MonoBehaviour
