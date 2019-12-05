@@ -24,7 +24,6 @@ namespace SMILEI.Vokaturi
                 var go = new GameObject("Sampler Updater");
 
                 _instance = go.AddComponent<SamplerUpdater>();
-                _instance.hideFlags = HideFlags.HideAndDontSave;
                 go.hideFlags = HideFlags.HideAndDontSave;
             }
             return _instance;

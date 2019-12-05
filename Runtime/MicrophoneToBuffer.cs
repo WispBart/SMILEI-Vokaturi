@@ -7,7 +7,7 @@ namespace SMILEI.Vokaturi
         public AudioBuffer WriteBuffer;
         public string DeviceName;
         public int Frequency;
-        public int SizeInSeconds;
+        public int LengthInSeconds = 4;
     
         private string _deviceName => string.IsNullOrEmpty(DeviceName) ? null : DeviceName;
         private void OnEnable() => StartListening();
@@ -18,8 +18,8 @@ namespace SMILEI.Vokaturi
         void StartListening()
         {
             if (WriteBuffer == null) return;
-            WriteBuffer.InitializeBufferIfNeeded(SizeInSeconds, 1, Frequency);
-            WriteBuffer.Buffer = Microphone.Start(_deviceName, true, SizeInSeconds, Frequency);
+            //WriteBuffer.InitializeBufferIfNeeded(LengthInSeconds, 1, Frequency); // Microphone.Start creates audioclip
+            WriteBuffer.Buffer = Microphone.Start(_deviceName, true, LengthInSeconds, Frequency);
         }
     
         [ContextMenu("Stop Listening")]

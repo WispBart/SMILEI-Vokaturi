@@ -27,6 +27,7 @@ namespace SMILEI.Vokaturi
 
         public void InitializeBufferIfNeeded(int sizeInSeconds, int channels, int frequency)
         {
+            return; // disable
             if (Buffer != null)
             {
                 bool isSame = true;
