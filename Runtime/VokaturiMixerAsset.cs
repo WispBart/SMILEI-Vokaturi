@@ -9,7 +9,7 @@ namespace SMILEI.Vokaturi
     [CreateAssetMenu(menuName = "SMILEI/Vokaturi/Mixer")]
     public class VokaturiMixerAsset : EmotionMixerAsset
     {
-        [SerializeField] private VokaturiMixer _implementation;
+        [SerializeField] private VokaturiMixer _implementation = new VokaturiMixer();
 
         public override IEmotionMixer Implementation => _implementation;
     }

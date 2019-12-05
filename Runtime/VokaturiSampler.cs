@@ -58,7 +58,7 @@ namespace SMILEI.Vokaturi
         }
 
 
-        private float _lastSampleTime;
+        [NonSerialized] private float _lastSampleTime = 0f;
 
 
         private void OnEnable()

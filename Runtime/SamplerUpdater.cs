@@ -10,8 +10,10 @@ namespace SMILEI.Vokaturi
         void Update();
         bool WantsEditorUpdate { get; }
     }
-    public class SamplerUpdater : MonoBehaviour
+    
+    public class SamplerUpdater
     {
+        private const string UpdaterGOName = "Sampler Updater";
 
         public List<IWantsUpdate> Samplers = new List<IWantsUpdate>();
 
@@ -21,27 +23,36 @@ namespace SMILEI.Vokaturi
         {
             if (_instance == null)
             {
-                var go = new GameObject("Sampler Updater");
-
-                _instance = go.AddComponent<SamplerUpdater>();
-                go.hideFlags = HideFlags.HideAndDontSave;
+                _instance = new SamplerUpdater();
+                #if !UNITY_EDITOR
+                StateUpdater.CreateGameObject(_instance.Update, UpdaterGOName);
+                #endif
             }
             return _instance;
         }
+        
+        #if UNITY_EDITOR
+        [UnityEditor.InitializeOnLoadMethod]
+        static void RegisterPlayModeChange() => UnityEditor.EditorApplication.playModeStateChanged += OnPlayModeStateChange;
 
-        void OnEnable()
+        static void OnPlayModeStateChange(UnityEditor.PlayModeStateChange state)
         {
-#if UNITY_EDITOR
+            if (state == UnityEditor.PlayModeStateChange.EnteredPlayMode)
+            {
+                if (_instance != null)  StateUpdater.CreateGameObject(_instance.Update, UpdaterGOName);
+            }
+        }
+        public SamplerUpdater()
+        {
             UnityEditor.EditorApplication.update += EditorUpdate;
-#endif
         }
 
-        void OnDisable()
+        ~SamplerUpdater()
         {
-#if UNITY_EDITOR
             UnityEditor.EditorApplication.update -= EditorUpdate;
-#endif
         }
+        #endif
+
 
 
         public void Register(IWantsUpdate c)
@@ -73,6 +84,4 @@ namespace SMILEI.Vokaturi
             }
         }
     }
-
-
 }
