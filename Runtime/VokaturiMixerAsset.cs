@@ -24,17 +24,25 @@ namespace SMILEI.Vokaturi
         private float _lastValueReceived; 
         public float LastValueReceivedTime { get; private set; }
 
+        private int _listenerCount = 0;
+
         public void Register()
         {
-            Unregister();
-            DataEvent = Sampler.GetDataEvent(Emotion);
-            DataEvent.AddListener(OnReceive);
-
+            _listenerCount++;
+            if (_listenerCount == 1)
+            {
+                DataEvent = Sampler.GetDataEvent(Emotion);
+                DataEvent.AddListener(OnReceive);
+            }
         }
 
         public void Unregister()
         {
-            DataEvent?.RemoveListener(OnReceive);
+            _listenerCount--;
+            if (_listenerCount == 0)
+            {
+                DataEvent?.RemoveListener(OnReceive);
+            }
         }
 
         public void OnReceive(double vokaturiValue)

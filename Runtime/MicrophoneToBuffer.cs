@@ -7,7 +7,7 @@ namespace SMILEI.Vokaturi
         public AudioBuffer WriteBuffer;
         public string DeviceName;
         public int Frequency;
-        public int LengthInSeconds = 4;
+        public int LengthInSeconds = 1;
     
         private string _deviceName => string.IsNullOrEmpty(DeviceName) ? null : DeviceName;
         private void OnEnable() => StartListening();
