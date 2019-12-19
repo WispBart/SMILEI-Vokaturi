@@ -52,12 +52,12 @@ namespace SMILEI.Vokaturi
 
             float[] samplesPlayed = new float[samplesSinceLastUpdate];
             Clip.GetData(samplesPlayed, SamplesPlayedInClip);
-            SamplesPlayedInClip += samplesSinceLastUpdate;
-            TotalSamplesPlayed += samplesSinceLastUpdate;
-            
 
             target.SetData(samplesPlayed, TotalSamplesPlayed % target.samples);
-            
+
+            SamplesPlayedInClip += samplesSinceLastUpdate;
+            TotalSamplesPlayed += samplesSinceLastUpdate;
+
             if (SamplesPlayedInClip == Clip.samples)
             {
                 _playing = false;
