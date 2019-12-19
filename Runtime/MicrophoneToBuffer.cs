@@ -20,6 +20,7 @@ namespace SMILEI.Vokaturi
             if (WriteBuffer == null) return;
             //WriteBuffer.InitializeBufferIfNeeded(LengthInSeconds, 1, Frequency); // Microphone.Start creates audioclip
             WriteBuffer.Buffer = Microphone.Start(_deviceName, true, LengthInSeconds, Frequency);
+            WriteBuffer.Buffer.name = "Microphone Recording";
         }
     
         [ContextMenu("Stop Listening")]
