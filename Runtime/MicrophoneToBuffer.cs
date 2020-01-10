@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 
 namespace SMILEI.Vokaturi
 {
@@ -21,6 +23,7 @@ namespace SMILEI.Vokaturi
             //WriteBuffer.InitializeBufferIfNeeded(LengthInSeconds, 1, Frequency); // Microphone.Start creates audioclip
             WriteBuffer.Buffer = Microphone.Start(_deviceName, true, LengthInSeconds, Frequency);
             WriteBuffer.Buffer.name = "Microphone Recording";
+            Debug.Log($"Devices detected: \n{string.Join("\n", Microphone.devices)}");
         }
     
         [ContextMenu("Stop Listening")]
