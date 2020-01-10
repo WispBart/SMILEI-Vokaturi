@@ -6,8 +6,8 @@ The package can be installed by adding this git repository to the Packages/manif
 
 ```
   "dependencies": {
-    "nl.ixdfontysict.smilei.core" : "https://git.fhict.nl/I875317/smilei-core.git#0.0.1"
-    "nl.ixdfontysict.smilei.vokaturi" : "https://git.fhict.nl/I872272/smilei_vokaturi.git#0.0.0"
+    "nl.ixdfontysict.smilei.core" : "https://git.fhict.nl/I875317/smilei-core.git#0.0.2"
+    "nl.ixdfontysict.smilei.vokaturi" : "https://git.fhict.nl/I872272/smilei_vokaturi.git#0.0.2"
   }
 ```
 
