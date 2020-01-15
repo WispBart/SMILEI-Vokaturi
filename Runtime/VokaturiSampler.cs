@@ -47,7 +47,7 @@ namespace SMILEI.Vokaturi
                 case VokaturiEmotion.Fear:
                     return Events.Fear;
                 case VokaturiEmotion.Happiness:
-                    return Events.Fear;
+                    return Events.Happiness;
                 case VokaturiEmotion.Neutrality:
                     return Events.Neutrality;
                 case VokaturiEmotion.Sadness:
