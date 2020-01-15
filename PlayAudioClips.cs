@@ -111,10 +111,10 @@ public class PlayAudioClips : MonoBehaviour
 
             float[] samplesPlayed = new float[samplesSinceLastUpdate];
             CurrentAudioClip.GetData(samplesPlayed, SamplesPlayedInClip);
+            RecentlyPlayedAudio.SetData(samplesPlayed, TotalSamplesPlayed % RecentlyPlayedAudio.samples);
+
             SamplesPlayedInClip += samplesSinceLastUpdate;
             TotalSamplesPlayed += samplesSinceLastUpdate;
-
-            RecentlyPlayedAudio.SetData(samplesPlayed, TotalSamplesPlayed % RecentlyPlayedAudio.samples);
 
             if (SamplesPlayedInClip == CurrentAudioClip.samples)
             {
