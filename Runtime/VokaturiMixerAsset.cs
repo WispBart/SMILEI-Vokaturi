@@ -51,7 +51,7 @@ namespace SMILEI.Vokaturi
 
         public Emotion GetValue()
         {
-            float confidence = _lastValueReceived.Equals(0f) ? 0f : 1f;
+            float confidence = Mathf.Approximately(_lastValueReceived, 0f) ? 0f : 1f;
             return new Emotion(_lastValueReceived, confidence);
         }
     }
